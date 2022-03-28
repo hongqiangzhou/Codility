@@ -24,3 +24,16 @@ class Solution {
         return unpaired; // return the unpaired value
     }
 }
+
+
+// H.Zhou's solution using streaming function
+    public static int solution(int[] A) {
+        Map<Integer, Boolean> map = Arrays.stream(A).boxed().collect(Collectors.groupingBy(Integer::intValue,
+                Collectors.collectingAndThen(
+                        Collectors.summarizingInt(Integer::intValue),
+                        dss -> dss.getCount() % 2 != 0
+                )
+                ));
+
+        return map.keySet().stream().filter(key -> map.get(key)).findFirst().orElse(-1);
+    }
