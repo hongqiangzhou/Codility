@@ -32,3 +32,14 @@ class Solution {
         return A.length+1;
     }
 }
+
+
+// My solution using Stream
+    public static int solution(int[] A) {
+        Set<Integer> set = Arrays.stream(A).boxed().filter(e -> e > 0).collect(Collectors.toSet());
+        if (set.size() == 0)
+            return 1;
+        Integer max = set.stream().max(Integer::compare).get();
+        int ans = IntStream.rangeClosed(1, max).boxed().filter(e -> !set.contains(e)).findFirst().orElse(max + 1);
+        return ans;
+    }
