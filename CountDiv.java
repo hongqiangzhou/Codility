@@ -32,3 +32,12 @@ class Solution {
         return num_div;
     }
 }
+
+    // My solution
+    public int solution(int A, int B, int K) {
+
+        int first = A % K == 0? A / K : A / K + 1;
+        int last =  B / K;
+
+        return last - first + 1;
+    }
