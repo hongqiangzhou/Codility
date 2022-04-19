@@ -50,3 +50,24 @@ class Solution {
         }
     }
 }
+
+
+// My solution.
+    private static int solution(String S) {
+
+        Map<Character, Character> map = Map.of('}', '{', ']', '[', ')', '(');
+        Set<Character> set = new HashSet<>(Arrays.asList('}', ']', ')'));
+
+        Stack<Character> stack = new Stack<>();
+        for (char c : S.toCharArray()) {
+            if (set.contains(c) ) {
+                if (stack.isEmpty() || map.get(c) != stack.pop())
+                    return 0;
+            } else {
+                stack.push(c);
+            }
+
+        }
+        return stack.isEmpty()? 1 : 0;
+
+    }
