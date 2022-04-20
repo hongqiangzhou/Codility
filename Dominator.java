@@ -51,3 +51,48 @@ class Solution {
         return -1;
     }
 }
+
+// My solution through Stream API. Has timeout errors as expected.
+    public static int solution(int[] A) {
+        if (A.length < 1) return -1;
+
+        Integer dominator = Arrays.stream(A).boxed()
+                .collect(Collectors.groupingBy(Integer::intValue, Collectors.counting()))
+                .entrySet().stream()
+                .filter(entry -> entry.getValue() > A.length / 2)
+                .map(Map.Entry::getKey)
+                .findFirst()
+                .orElse(null);
+        if (dominator != null) {
+            return IntStream.range(0, A.length).filter(i -> A[i] == dominator).findFirst().orElse(-1);
+        }
+        return -1;
+
+    }
+
+// This solution get 100% score.
+class Solution {
+    public int solution(int[] A) {
+        // write your code in Java SE 8
+        if (A.length < 1) return -1;
+
+        if (A.length == 1) return 0;
+
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < A.length; i++) {
+            if (map.keySet().contains(A[i])) {
+                int count = map.get(A[i]) + 1;
+                map.put(A[i], count);
+                if (count > A.length / 2)
+                    return i;
+            } else {
+                map.put(A[i], 1);
+            }
+
+        }
+
+        return -1;        
+    }
+}
+
