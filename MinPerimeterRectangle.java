@@ -21,3 +21,18 @@ class Solution {
         return perimeter;
      }
 }
+
+// My solution
+    public static int solution(int N) {
+        int sqrtN = (int) Math.sqrt(N);
+        if (sqrtN * sqrtN == N) return 4 * sqrtN;
+
+        Integer minParameter = IntStream.rangeClosed(1, sqrtN).boxed()
+                .filter(i -> N % i == 0)
+                .map(i -> 2 * (i + N / i))
+                .min(Comparator.comparing(Integer::intValue))
+                .get();
+
+
+        return (int) minParameter;
+    }
