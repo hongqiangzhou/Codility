@@ -51,7 +51,7 @@ Lesson 10 Prime and composite numbers
 - [MinPerimeterRectangle](https://github.com/Mickey0521/Codility/blob/master/MinPerimeterRectangle.java)
 - [CountFactors](https://github.com/Mickey0521/Codility/blob/master/CountFactors.java)
 - [Peaks](https://github.com/Mickey0521/Codility/blob/master/Peaks.java) (respectable)
-- Flags (respectable)
+- [Flags](https://github.com/hongqiangzhou/Codility/blob/master/Flags.java) (respectable)
 
 Lesson 11 Sieve of Eratosthenes
 - [CountSemiprimes](https://github.com/Mickey0521/Codility/blob/master/CountSemiprimes.java)
