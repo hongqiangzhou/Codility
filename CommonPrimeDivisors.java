@@ -12,14 +12,14 @@ class Solution {
     }
 
     private int gcd(int a, int b) {
-               if (a%b == 0)
+       if (a%b == 0)
            return b;
        else
            return gcd(b, a%b);
     }
 
     private int removeCommonPrimeDivisors(int x, int y) {
-                while(x != 1) {
+        while(x != 1) {
             int gcdValue = gcd(x, y);
             if (gcdValue == 1)
                 break;
