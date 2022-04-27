@@ -61,6 +61,8 @@ Lesson 12 Euclidean algorithm
 - [ChocolatesByNumbers](https://github.com/Mickey0521/Codility/blob/master/ChocolatesByNumbers_SimpleLowPerformance.java)
 - [CommonPrimeDivisors](https://github.com/hongqiangzhou/Codility/blob/master/CommonPrimeDivisors.java) (respectable)
 
+Ref for the Eclidean Algorithm: https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm
+
 Lesson 13 Fibonacci numbers
 - [Ladder](https://github.com/Mickey0521/Codility/blob/master/Ladder.java) (respectable)
 - [FibFrog](https://github.com/Mickey0521/Codility/blob/master/FibFrog.java) (respectable)
