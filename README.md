@@ -59,7 +59,7 @@ Lesson 11 Sieve of Eratosthenes
 
 Lesson 12 Euclidean algorithm
 - [ChocolatesByNumbers](https://github.com/Mickey0521/Codility/blob/master/ChocolatesByNumbers_SimpleLowPerformance.java)
-- CommonPrimeDivisors (respectable)
+- [CommonPrimeDivisors](https://github.com/hongqiangzhou/Codility/blob/master/CommonPrimeDivisors.java) (respectable)
 
 Lesson 13 Fibonacci numbers
 - [Ladder](https://github.com/Mickey0521/Codility/blob/master/Ladder.java) (respectable)
