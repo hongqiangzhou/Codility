@@ -69,7 +69,7 @@ Lesson 13 Fibonacci numbers
 
 Lesson 14 Binary search algorithm
 - [MinMaxDivision](https://github.com/Mickey0521/Codility/blob/master/MinMaxDivision.java) (respectable)
-- NailingPlanks (respectable)
+- [NailingPlanks](https://github.com/hongqiangzhou/Codility/blob/master/NailingPlanks.java) (respectable)
 
 Lesson 15 Caterpillar method
 - [AbsDistinct](https://github.com/Mickey0521/Codility/blob/master/AbsDistinct.java)
