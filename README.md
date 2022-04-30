@@ -75,7 +75,7 @@ Lesson 15 Caterpillar method
 - [AbsDistinct](https://github.com/Mickey0521/Codility/blob/master/AbsDistinct.java)
 - [CountDistinctSlices](https://github.com/Mickey0521/Codility/blob/master/CountDistinctSlices.java)
 - [CountTriangles](https://github.com/Mickey0521/Codility/blob/master/CountTriangles.java)
-- MinAbsSumOfTwo (respectable)
+- [MinAbsSumOfTwo](https://github.com/hongqiangzhou/Codility/blob/master/MinAbsSumOfTwo.java) (respectable)
 
 Lesson 16 Greedy algorithms
 - [MaxNonoverlappingSegments](https://github.com/Mickey0521/Codility/blob/master/MaxNonoverlappingSegments.java)
