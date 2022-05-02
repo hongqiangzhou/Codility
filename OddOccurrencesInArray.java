@@ -26,14 +26,16 @@ class Solution {
 }
 
 
-// H.Zhou's solution using streaming function
-    public static int solution(int[] A) {
-        Map<Integer, Boolean> map = Arrays.stream(A).boxed().collect(Collectors.groupingBy(Integer::intValue,
-                Collectors.collectingAndThen(
-                        Collectors.summarizingInt(Integer::intValue),
-                        dss -> dss.getCount() % 2 != 0
-                )
-                ));
-
-        return map.keySet().stream().filter(key -> map.get(key)).findFirst().orElse(-1);
+// My solution with score of 88%.
+class Solution {
+    public int solution(int[] A) {
+        // write your code in Java SE 8
+        Map<Integer, Long> map = Arrays.stream(A).boxed()
+                .collect(Collectors.groupingBy(Integer::intValue, Collectors.counting()));
+        return map.entrySet().stream()
+                .filter(e -> e.getValue() % 2 != 0)
+                .map(Map.Entry::getKey)
+                .findFirst()
+                .orElse(-1);
     }
+}
