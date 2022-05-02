@@ -34,3 +34,25 @@ class Solution {
         return max_gap;
     }
 }
+
+// My solution
+class Solution {
+    public int solution(int N) {
+        // write your code in Java SE 8
+        int res = 0;
+        int currentGap = 0;
+        boolean counting = false;
+        while(N != 0) {
+            if (N % 2 == 1) {
+                res = Math.max(res, currentGap);
+                currentGap = 0;
+                counting = true;
+            } else {
+                if (counting) currentGap++;
+            }
+            N = N / 2;
+        }
+
+        return res;
+    }
+}
