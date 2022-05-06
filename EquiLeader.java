@@ -88,3 +88,47 @@ class Solution {
         return num_Equi_leaders;
     }
 }
+
+// My solution: similar approach.
+class Solution {
+    public int solution(int[] A) {
+        // write your code in Java SE 8
+        if (A.length < 2) return 0;
+        
+        Map<Integer, Integer> map = new HashMap<>();
+        Integer leader = null;
+        Boolean foundLeader = false;
+
+        for (int a : A) {
+            if (map.containsKey(a)) {
+                int count = map.get(a) + 1;
+                map.put(a, count);
+                if (!foundLeader && count > (0.5) * (A.length)) {
+                    leader = a;
+                    foundLeader = true;
+                }
+            } else {
+                map.put(a, 1);
+            }
+        }
+        if (!foundLeader) return 0;
+
+        int count = map.get(leader);
+
+        int leftCount = 0;
+        int rightCount = count;
+        int res = 0;
+        for (int i = 0; i < A.length-1; i++) {
+            if (A[i] == leader) {
+                leftCount++;
+                rightCount--;
+            }
+
+            if (leftCount > (0.5) * (i+1) && rightCount > (0.5) * (A.length - i - 1)) {
+                res++;
+            }
+        }
+
+        return res;        
+    }
+}
