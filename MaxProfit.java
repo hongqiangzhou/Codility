@@ -29,3 +29,28 @@ class Solution {
         return maxProfit;
     }
 }
+
+
+// My solution.
+class Solution {
+    public static void main(String[] args) {
+
+        int[] A = {23171, 21011, 21123, 21366, 21013, 21367};
+        System.out.println(solution(A));
+    }
+
+    private static int solution(int[] A) {
+        if (A.length <= 1) return 0;
+
+        int min = Integer.MAX_VALUE;
+        int maxProfit = 0;
+        for (int a : A) {
+            min = Math.min(min, a);
+            maxProfit = Math.max(maxProfit, a - min);
+        }
+
+        return maxProfit;
+
+    }
+
+}
