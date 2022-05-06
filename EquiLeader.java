@@ -94,7 +94,7 @@ class Solution {
     public int solution(int[] A) {
         // write your code in Java SE 8
         if (A.length < 2) return 0;
-        
+
         Map<Integer, Integer> map = new HashMap<>();
         Integer leader = null;
         Boolean foundLeader = false;
@@ -103,7 +103,7 @@ class Solution {
             if (map.containsKey(a)) {
                 int count = map.get(a) + 1;
                 map.put(a, count);
-                if (!foundLeader && count > (0.5) * (A.length)) {
+                if (!foundLeader && count > A.length/2) {
                     leader = a;
                     foundLeader = true;
                 }
@@ -124,7 +124,7 @@ class Solution {
                 rightCount--;
             }
 
-            if (leftCount > (0.5) * (i+1) && rightCount > (0.5) * (A.length - i - 1)) {
+            if (leftCount > (i+1)/2 && rightCount > (A.length - i - 1)/2) {
                 res++;
             }
         }
