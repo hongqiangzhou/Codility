@@ -40,3 +40,32 @@ class Solution {
         return maxDoubleSlice;
     }
 }
+
+
+// My solution. With one error, score: 92%
+class Solution {
+    public int solution(int[] A) {
+        // write your code in Java SE 8
+        A[0] = 0;
+        A[A.length-1] = 0;
+        int[] maxLeft = new int[A.length];
+        int[] maxRight = new int[A.length];
+
+        for (int i = 1; i < A.length; i++) {
+            int curr = maxLeft[i-1] + A[i-1];
+            maxLeft[i] = Math.max(0, curr);
+        }
+
+        for (int i = A.length-2; i >= 0; i--) {
+            int curr = maxRight[i+1] + A[i+1];
+            maxRight[i] = Math.max(0, curr);
+        }
+
+        int res = 0;
+        for (int i = 1; i < A.length-2; i++) {
+            res = Math.max(maxLeft[i] + maxRight[i], res);
+        }
+
+        return res;        
+    }
+}
