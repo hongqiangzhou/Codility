@@ -50,3 +50,25 @@ class Solution {
         }
     }
 }
+
+// My solution, score: 100%.
+class Solution {
+    public int solution(String S) {
+        // write your code in Java SE 8
+        Map<Character, Character> map = new HashMap<Character, Character>(){{
+           put(')', '(');
+           put(']', '[');
+           put('}', '{');
+        }};
+        Stack<Character> stack = new Stack<>();
+        for (Character c : S.toCharArray()) {
+            if (map.containsKey(c)) {
+                if (stack.isEmpty() ||map.get(c) != stack.pop())
+                    return 0;
+            } else {
+                stack.push(c);
+            }
+        }
+        return stack.isEmpty()? 1 : 0;
+    }
+}
