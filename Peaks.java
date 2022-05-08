@@ -57,3 +57,35 @@ class Solution {
         return 0;
     }
 }
+
+// My solution, score: 90%, O(N * log(log(N))), one timeout exception
+class Solution {
+    public int solution(int[] A) {
+        // write your code in Java SE 8
+        List<Integer> peaks = new ArrayList<>();
+        for (int i = 1; i < A.length - 1; i++) {
+            if (A[i-1] < A[i] && A[i+1] < A[i]) peaks.add(i);
+        }
+
+        if (peaks.size() == 0) return 0;
+
+        int ans = A.length;
+        while(true) {
+            int blockSize = A.length / ans;
+
+            Set<Integer> containingBlocks = new HashSet<>();
+            for (Integer peakIndex : peaks) {
+                containingBlocks.add(peakIndex / blockSize);
+            }
+
+            if (containingBlocks.size() == ans)
+                return ans;
+
+            ans--;
+            while(ans > 0 && A.length % ans != 0) {
+                ans--;
+            }
+
+        }        
+    }
+}
