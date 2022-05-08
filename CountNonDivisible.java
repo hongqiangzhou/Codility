@@ -57,32 +57,20 @@ class Solution {
 }
 
 // My solution, O(N*2), 66% score.
+
 class Solution {
     public int[] solution(int[] A) {
         // write your code in Java SE 8
-        Map<Integer, List<Integer>> map = new HashMap<>();
-        for (int i = 0; i < A.length; i++) {
-            int a = A[i];
-            if (map.containsKey(a)) {
-                List<Integer> list = map.get(a);
-                list.add(i);
-                map.put(a, list);
-            } else {
-                List<Integer> list = new ArrayList<>();
-                list.add(i);
-                map.put(a, list);
-            }
-        }
+        Map<Integer, List<Integer>> map = IntStream.range(0, A.length).boxed().collect(Collectors.groupingBy(i -> A[i]));
 
-        int[] res = new int[A.length];
-        for (Integer key : map.keySet()) {
+        int[] ans = new int[A.length];
+        for (Integer key: map.keySet()) {
             int count = map.entrySet().stream()
-                .filter(e -> key % e.getKey() != 0)
-                .map(e -> e.getValue().size())
-                .collect(Collectors.reducing(0, Integer::sum));
-            map.get(key).forEach(i -> res[i] = count);
+                    .filter(e -> e.getKey() != key && key % e.getKey() != 0).map(e -> e.getValue().size())
+                    .collect(Collectors.summingInt(Integer::intValue));
+            map.get(key).stream().forEach(i -> ans[i] = count);
         }
 
-        return res;        
+        return ans;
     }
 }
