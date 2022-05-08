@@ -56,7 +56,7 @@ class Solution {
     }
 }
 
-// My solution, O(N*2), 66% score.
+// My solution, O(N**2), 66% score.
 
 class Solution {
     public int[] solution(int[] A) {
