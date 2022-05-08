@@ -66,9 +66,10 @@ class Solution {
         int[] ans = new int[A.length];
         for (Integer key: map.keySet()) {
             int count = map.entrySet().stream()
-                    .filter(e -> e.getKey() != key && key % e.getKey() != 0).map(e -> e.getValue().size())
+                    .filter(e -> e.getKey() != key && key % e.getKey() != 0)
+                    .map(e -> e.getValue().size())
                     .collect(Collectors.summingInt(Integer::intValue));
-            map.get(key).stream().forEach(i -> ans[i] = count);
+            map.get(key).forEach(i -> ans[i] = count);
         }
 
         return ans;
