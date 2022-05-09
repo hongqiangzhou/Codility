@@ -123,6 +123,14 @@ class Solution {
         fab.remove(0);
         return fab;
     }
+}
 
+class Jump {
+    public int position;
+    public int counter;
 
+    public Jump(int position, int counter) {
+        this.position = position;
+        this.counter = counter;
+    }
 }
