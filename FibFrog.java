@@ -85,7 +85,7 @@ class Solution {
     }
 
     private static int solution(int[] A) {
-        List<Integer> fabs = getFabonacci(A.length);
+        List<Integer> fabs = getFabonacci(A.length + 1);
 
         boolean[] accessed = new boolean[A.length];
         Stack<Jump> jumps = new Stack<>();
