@@ -18,3 +18,17 @@ class Solution {
     }
 
 }
+
+// My solution, not tested
+
+    private int solution(int A, int B) {
+
+        boolean[] flag = new boolean[A];
+        int i = 0;
+        while(!flag[(i*B) % A]) {
+            flag[(i*B) % A] = true;
+            i++;
+        }
+
+        return i; // Since "i" starts with "0", there is no need to minus 1 hear.
+    }
