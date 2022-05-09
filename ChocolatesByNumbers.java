@@ -19,6 +19,21 @@ class Solution {
 
 }
 
+// This solution is similar to above, but more explainative.
+
+    private int solution(int N, int M) {
+        // find lcm (a number that can be devided by both N and M), ex N = 10, M = 4: lcm = 20 => 20 / 10 = 2 and 20 / 4 = 5;
+        int lcm = N * M / gcd(N, M); 
+        return lcm / M;
+    }
+
+    private int gcd(int a, int b) {
+        if (a % b == 0)
+            return b;
+        else
+            return gcd(b, a % b);
+    }
+
 // My solution, not tested
 
     private int solution(int A, int B) {
