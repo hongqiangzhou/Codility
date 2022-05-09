@@ -1,14 +1,12 @@
 class Solution {
     public int solution(int[] A, int[] B) {
         // write your code in Java SE 8
-        int count = 0;
+        int ans = 0;
         for (int i = 0; i < A.length; i++) {
             int gcdValue = gcd(A[i], B[i]);
-            if (removeCommonPrimeDivisors(A[i], gcdValue) == 1
-                    && removeCommonPrimeDivisors(B[i], gcdValue) == 1)
-                count++;
+            if (hasSamePrimeDivisors(A[i], B[i])) ans++;
         }
-        return count;
+        return ans;
     }
 
     private int gcd(int a, int b) {
@@ -17,16 +15,30 @@ class Solution {
        else
            return gcd(b, a%b);
     }
+    
+    private boolean hasSamePrimeDivisors(int a, int b) {
+        int gcdValue = gcd(a, b);
 
-    private int removeCommonPrimeDivisors(int x, int y) {
-        while(x != 1) {
-            int gcdValue = gcd(x, y);
-            if (gcdValue == 1)
+        while(a != 1) {
+            int gcdA = gcd(a, gcdValue);
+            if (gcdA == 1)
                 break;
-            x = x/gcdValue;
+            a = a / gcdA;
         }
-        return x;
+
+        if (a != 1)
+            return false;
+
+        while(b != 1) {
+            int gcdB = gcd(b, gcdValue);
+            if (gcdB == 1)
+                break;
+            b = b / gcdB;
+        }
+
+        return b == 1;
     }
+
 }
 
 
