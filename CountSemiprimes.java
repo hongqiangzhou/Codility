@@ -70,3 +70,52 @@ class Solution {
         return result;
     }
 }
+
+// My solution, score: 88%, one timeout exception
+
+class Solution {
+    public int[] solution(int N, int[] P, int[] Q) {
+        // write your code in Java SE 8
+
+        boolean[] primeArray = new boolean[N+1];
+        Arrays.fill(primeArray, true);
+        primeArray[0] = false;
+        primeArray[1] = false;
+
+        int sqrtN = (int) Math.ceil(Math.sqrt(N));
+
+        for (int i = 2; i < sqrtN; i++) {
+            if (primeArray[i]) {
+                for (int j = 2*i; j <= N; j = j+i) primeArray[j] = false;
+            }
+        }
+
+        List<Integer> primeList = IntStream.rangeClosed(0, N).boxed()
+                .filter(i -> primeArray[i])
+                .collect(Collectors.toList());
+
+        boolean[] semiPrimeArray = new boolean[N+1];
+        Arrays.fill(semiPrimeArray, false);
+
+        for (int i = 0; i < primeList.size(); i++) {
+            for (int j = i; j < primeList.size(); j++) {
+                long temp = (long) primeList.get(i) * (long) primeList.get(j);
+                if (temp <= N)
+                    semiPrimeArray[(int)temp] = true;
+                else
+                    break;
+            }
+        }
+
+        int[] semiPrimeCumulateCount = new int[N+1];
+        semiPrimeCumulateCount[0] = 0;
+        for (int i = 1; i <= N; i++)
+            semiPrimeCumulateCount[i] = semiPrimeCumulateCount[i-1] + (semiPrimeArray[i]? 1 : 0);
+
+        int[] ans = new int[P.length];
+        for (int i = 0; i < P.length; i++) {
+            ans[i] =  (semiPrimeCumulateCount[Q[i]] - semiPrimeCumulateCount[P[i]-1]);
+        }
+        return ans;
+    }
+}
