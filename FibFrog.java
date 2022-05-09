@@ -73,3 +73,56 @@ class Solution {
         }
     }
 }
+
+
+// My solution, following the same idea as above. Not tested yet.
+class Solution {
+    public static void main(String[] args) {
+
+        int[] A = {0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0};
+
+        System.out.println(solution(A));
+    }
+
+    private static int solution(int[] A) {
+        List<Integer> fabs = getFabonacci(A.length);
+
+        boolean[] accessed = new boolean[A.length];
+        Stack<Jump> jumps = new Stack<>();
+        jumps.add(new Jump(-1, 0));
+
+        while(true) {
+            if (jumps.isEmpty())
+                return -1;
+
+            Jump currJump = jumps.pop();
+            for (int f : fabs) {
+                if (currJump.position + f == A.length)
+                    return currJump.counter + 1;
+                else if (currJump.position + f > A.length || A[currJump.position + f] == 0 || accessed[currJump.position + f])
+                    continue;
+                else {
+                    jumps.add(new Jump(currJump.position + f, currJump.counter + 1));
+                    accessed[currJump.position + f] = true;
+                }
+            }
+        }
+
+    }
+
+    private static List<Integer> getFabonacci(int max) {
+        List<Integer> fab = new ArrayList<>();
+        fab.add(1);
+        fab.add(1);
+        int i = 2;
+        while(fab.get(i-1) <= max) {
+            fab.add(fab.get(i-1) + fab.get(i-2));
+            i++;
+        }
+
+        fab.remove(0);
+        return fab;
+    }
+
+
+}
