@@ -46,6 +46,7 @@ class Solution {
 
 
 // My solution, O(n), score: 100%.
+class Solution {
     public int solution(int M, int[] A) {
         // write your code in Java SE 8
         int ans = 0;
