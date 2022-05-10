@@ -43,3 +43,23 @@ class Solution {
         return numSlice;
     }
 }
+
+
+// My solution, O(n), score: 100%.
+class Solution {
+    public int solution(int M, int[] A) {
+        // write your code in Java SE 8
+        int ans = 0;
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < A.length; i++) {
+            while(!set.add(A[i])) {
+                set.remove(A[i - set.size()]); // If value of A[i] is already in the set, remove the left-most element of the slice. 
+            }
+            ans += set.size(); // Adding one element to the right end of slice increases number of slices by the size of current slice.
+            if (ans >= 1_000_000_000) // Prevent overflow.
+                return 1_000_000_000;
+        }
+
+        return ans;
+    }
+}
