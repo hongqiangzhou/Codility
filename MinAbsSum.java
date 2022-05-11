@@ -1,4 +1,4 @@
-/ Don't know what's wrong. Below solution gets 27% with a lot of errors.
+// Don't know what's wrong. Below solution gets 27% with a lot of errors.
 class Solution {
     public int solution(int[] A) {
         // write your code in Java SE 8
@@ -19,26 +19,25 @@ class Solution {
 class Solution {
     public int solution(int[] A) {
         // write your code in Java SE 8
-                if (A.length == 0) return 0;
+        List<Integer> aList = Arrays.stream(A).boxed().map(Math::abs).collect(Collectors.toList());
+        int sum = aList.stream().collect(Collectors.summingInt(Integer::intValue));
 
-        int sum = Arrays.stream(A).boxed().map(Math::abs).reduce(0, Integer::sum);
-        int[] dp = new int[sum+1];
-        dp[0] = 1;
-        for (int j = 0; j < A.length; j++) {
+        boolean[] dp = new boolean[sum + 1];
+        dp[0] = true;
+
+        for (int a : aList) {
             for (int i = sum; i >= 0; i--) {
-                if (dp[i] == 1 && i + Math.abs(A[j]) <= sum) {
-                    dp[i+Math.abs(A[j])] = 1;
-                }
+                if (dp[i] && a + i <= sum)
+                    dp[a + i] = true;
             }
         }
 
-        int res = sum;
-
-        for (int i = 0; i < sum/2 + 1; i++) {
-            if (dp[i] == 1)
-                res = Math.min(res, sum - 2 * i);
+        int ans = sum;
+        for (int i = 0; i < sum / 2 + 1; i++) {
+            if (dp[i])
+                ans = Math.min(ans, sum - 2 * i);
         }
 
-        return res;
+        return ans;
     }
 }
