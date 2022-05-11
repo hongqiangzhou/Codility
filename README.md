@@ -86,5 +86,5 @@ Lesson 17 Dynamic programming
 - MinAbsSum (ambitious)
 
 2015 Contest
-- [Longest Password] ()
+- [Longest Password](https://github.com/hongqiangzhou/Codility/blob/master/LongestPassword.java)
 - 
