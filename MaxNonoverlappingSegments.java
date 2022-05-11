@@ -37,3 +37,35 @@ class Solution {
         return numNonOverlap;
     }
 }
+
+// My solution, score: 90%, one timeout exception
+class Solution {
+    public int solution(int[] A, int[] B) {
+        // write your code in Java SE 8
+        if (A.length == 0) return 0;
+
+        List<Segment> segments = IntStream.range(0, A.length).boxed()
+                .map(i -> new Segment(A[i], B[i]))
+                .collect(Collectors.toList());
+        int ans = 1;
+        Segment currSegment = segments.get(0);
+        for (int i = 1; i < segments.size(); i++) {
+            if (segments.get(i).x1 > currSegment.x2) {
+                currSegment = segments.get(i);
+                ans++;
+            }
+        }
+
+        return ans;
+    }
+
+    private class Segment {
+        public int x1;
+        public int x2;
+
+        Segment(int x1, int x2) {
+            this.x1 = x1;
+            this.x2 = x2;
+        }
+    }
+}
