@@ -35,7 +35,7 @@ class Solution {
         int ans = sum;
         for (int i = 0; i < sum / 2 + 1; i++) {
             if (dp[i])
-                ans = Math.min(ans, sum - 2 * i);
+                ans = Math.min(ans, Math.abs(sum - 2 * i));
         }
 
         return ans;
