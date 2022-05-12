@@ -83,8 +83,8 @@ Lesson 16 Greedy algorithms
 
 Lesson 17 Dynamic programming
 - [NumberSolitaire](https://github.com/Mickey0521/Codility/blob/master/NumberSolitaire.java) (respectable)
-- MinAbsSum (ambitious)
+- [MinAbsSum](https://github.com/hongqiangzhou/Codility/blob/master/MinAbsSum.java) (ambitious)
 
 2015 Contest
-- [Longest Password](https://github.com/hongqiangzhou/Codility/blob/master/LongestPassword.java)
-- 
+- [LongestPassword](https://github.com/hongqiangzhou/Codility/blob/master/LongestPassword.java)
+- FloodDepth
