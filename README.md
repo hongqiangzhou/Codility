@@ -88,3 +88,6 @@ Lesson 17 Dynamic programming
 2015 Contest
 - [LongestPassword](https://github.com/hongqiangzhou/Codility/blob/master/LongestPassword.java)
 - [FloodDepth](https://github.com/hongqiangzhou/Codility/blob/master/FloodDepth.java)
+
+Exercise 4: Algorithm Skills
+- [FirstUnique](https://github.com/hongqiangzhou/Codility/blob/master/FirstUnique.java)
