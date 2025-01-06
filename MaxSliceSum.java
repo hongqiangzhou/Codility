@@ -39,6 +39,5 @@ class Solution {
             carry = temp > 0 ? temp : 0;
         }
         return maxLeft;
-        int res = A[0];
     }
 }
