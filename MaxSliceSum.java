@@ -31,22 +31,14 @@ class Solution {
         // write your code in Java SE 8
         if (A.length == 1) return A[0];
 
-        int res = A[0];
-        int preSum = Math.max(0, A[0]);
-        for (int i = 1; i < A.length; i++) {
-            int a = A[i];
-            int currSum = preSum + a;
-
-            if (currSum < 0) {
-                preSum = 0;
-            } else {
-                preSum = currSum;
-            }
-            res = Math.max(currSum, res);
-
+        int carry = A[0] > 0 ? A[0] : 0;
+        int maxLeft = A[0];
+        for (int i = 1; i < A.length;i++) {
+            int temp = carry + A[i];
+            maxLeft = Math.max(maxLeft, temp);
+            carry = temp > 0 ? temp : 0;
         }
-
-        return res;
-
+        return maxLeft;
+        int res = A[0];
     }
 }
