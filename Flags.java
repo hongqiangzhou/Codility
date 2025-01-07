@@ -1,70 +1,38 @@
-// Below solution has 100% score.
+// My solution, 100% score.
 class Solution {
     public int solution(int[] A) {
         // write your code in Java SE 8
-        if (A.length == 1) return 0;
+        if (A.length < 3) return 0;
 
-        int[] indexPeaks = new int[A.length];
+        int[] peaks = new int[A.length];
         int numPeaks = 0;
         for (int i = 1; i < A.length-1; i++) {
             if (A[i-1] < A[i] && A[i+1] < A[i]) {
-                indexPeaks[numPeaks] = i;
+                peaks[i] = i;
                 numPeaks++;
             }
         }
 
-        if (numPeaks == 1) return 1;
+        if (numPeaks < 2) return numPeaks;
 
-        int res = 0;
-        int k = 2;
+        int K = 2;
         while(true) {
-            int numFlags = 1;
-            int prevRes = res;
-            int prevIndex = indexPeaks[0];
+            int numFlags = K - 1;
+            int lastFlagIndex = peaks[0];
             for (int i = 1; i < numPeaks; i++) {
-                if (indexPeaks[i] - prevIndex >= k) {
-                    numFlags++;
-                    prevIndex = indexPeaks[i];
-                    if (numFlags == k) {
-                        res = k;
-                        break;
-                    }
+                if (peaks[i] - lastFlagIndex >= K) {
+                    numFlags--;
+                    if (numFlags == 0) break;
+                    lastFlagIndex = peaks[i]
                 }
             }
-            if (res == prevRes) break;
-            k++;
-        }
-
-        return res;        
-    }
-}
-
-// Another solution, score: 80%, a few timeout exceptions
-class Solution {
-    public int solution(int[] A) {
-        // write your code in Java SE 8
-        List<Integer> peaks = new ArrayList<Integer>();
-        for (int i = 1; i < A.length - 1; i++) {
-            if (A[i-1] < A[i] && A[i+1] < A[i]) peaks.add(i);
-        }
-
-        if (peaks.size() < 2) return peaks.size();
-
-        int ans = 1;
-        while(true) {
-            int numFlags = 1;
-            int prevPeak = peaks.get(0);
-            for (int i = 1; i < peaks.size(); i++) {
-                if (peaks.get(i) >= prevPeak + ans) {
-                    numFlags++;
-                    prevPeak = peaks.get(i);
-                    if (numFlags == ans) break;
-                }
+            if (numFlags > 0) {
+                K--;
+                break;
             }
-            if (numFlags < ans) break;
-            ans++;
+            K++;
         }
 
-        return ans - 1;
+        return K;
     }
 }
