@@ -56,8 +56,41 @@ class Solution {
     }
 }
 
-// My solution, O(N**2), 66% score.
+// My revised version, similar approach.
+class Solution {
+    public int[] solution(int[] A) {
+        // Implement your solution here
+        Map<Integer, Long> map1 = Arrays.stream(A).boxed()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
+        Map<Integer, Long> map2 = new HashMap<>();
+        for (int key: map1.keySet()) {
+            int sqrtKey = (int) Math.sqrt(key);
+            Long numDivisors = 0L;
+
+            for (int i = 1; i <= sqrtKey; i++) {
+                if (key % i == 0) {
+                    if (map1.containsKey(i)) {
+                        numDivisors = numDivisors + map1.get(i);
+                    }
+                    int anotherDivisor = key / i;
+                    if (i != anotherDivisor && map1.containsKey(anotherDivisor)) {
+                        numDivisors = numDivisors + map1.get(anotherDivisor);
+                    }
+                }
+
+            }
+            map2.put(key, A.length - numDivisors);
+        }
+
+        int[] ans = new int[A.length];
+        IntStream.range(0, A.length).boxed().forEach(i -> ans[i] = map2.get(A[i]).intValue());
+
+        return ans;
+    }
+}
+
+// My solution, O(N**2), 66% score.
 class Solution {
     public int[] solution(int[] A) {
         // write your code in Java SE 8
