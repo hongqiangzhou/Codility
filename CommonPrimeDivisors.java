@@ -41,6 +41,43 @@ class Solution {
 
 }
 
+// My solution following a YouTube clip, 100% score.
+class Solution {
+    public int solution(int[] A, int[] B) {
+        // Implement your solution here
+        int ans = 0;
+        for (int i = 0; i < A.length; i++) {
+            if (hasAllPrimeFactors(A[i], B[i]) && hasAllPrimeFactors(B[i], A[i])) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+
+    /**
+    * If all the prime factors of X are factors of Y, then X/gcd(X,Y) will be 1 or contains only factors of Y.
+    */
+    private boolean hasAllPrimeFactors(int x, int y) {
+        if (x == 1) {
+            return true;
+        }
+        int gcdValue = gcd(x, y);
+        if (gcdValue == 1) {
+            return false;
+        } else {
+            return hasAllPrimeFactors(x/gcdValue, y);
+        }
+    }
+
+    private int gcd(int a, int b) {
+        if (a % b == 0) {
+            return b;
+        } else {
+            return gcd(b, a % b);
+        }
+    }
+}
+
 
 // Straightfoward solution, score: 53%, OutOfMemoryExceptions
 class Solution {
