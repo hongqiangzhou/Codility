@@ -80,6 +80,54 @@ class Solution {
     }
 }
 
+// My revision of above solution, score = 100%.
+import java.util.*;
+
+class Solution {
+    public int solution(int[] A) {
+        // Implement your solution here
+        List<Integer> fabs = new ArrayList<>();
+        fabs.add(1);
+        fabs.add(2);
+        int i = 2;
+        int temp = fabs.get(i-1) + fabs.get(i-2);
+        while(temp <= A.length+1) {
+            fabs.add(temp);
+            i++;
+            temp = fabs.get(i-1) + fabs.get(i-2);
+        }
+        Collections.reverse(fabs);
+
+        Queue<Jump> queue = new LinkedList<>();
+        queue.add(new Jump(-1, 0));
+        while (!queue.isEmpty()) {
+            Jump jump = queue.remove();
+            for (int fab: fabs) {
+                int position = jump.position + fab;
+                if (position == A.length) {
+                    return jump.steps + 1;
+                } else if (position < A.length && A[position] == 1) {
+                    queue.add(new Jump(position, jump.steps + 1));
+                    A[position] = 0; // This way we prevent other possiblities which land on the same point through more steps.
+                }
+            }
+        }
+
+        return -1;
+    }
+
+    class Jump {
+        int position;
+        int steps;
+
+        Jump(int position, int steps) {
+            this.position = position;
+            this.steps = steps;
+        }
+
+    }
+}
+
 
 // My solution, correctness = 83%, performance = 33%.
 // Consider a case when A = [0, 1, 1, 0, 0, 1]. Below solution yields 3 (A[2], A[5], then 5 + 1). 
@@ -139,3 +187,4 @@ class Solution {
     }
     
 }
+
