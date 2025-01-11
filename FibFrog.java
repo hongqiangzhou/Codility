@@ -81,6 +81,7 @@ class Solution {
 }
 
 // My revision of above solution, score = 100%.
+// The key point is to use a Queue instead of Stack.
 import java.util.*;
 
 class Solution {
