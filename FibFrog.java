@@ -1,13 +1,10 @@
 package FibFrog;
 
 import java.util.*;
-// for using "point" (java.awt.*)
-import java.awt.*;
 
 class Solution {
     public int solution(int[] A) {
-
-        // note: cannot use "List" (both java.util.* and java.awt.* have "List")
+        // Implement your solution here
         ArrayList<Integer> fibonacci = new ArrayList<>();
         fibonacci.add(0); // note: f(0) = 0 (as in the quesion)
         fibonacci.add(1);
@@ -70,6 +67,15 @@ class Solution {
             }
             
             index++; // take "next element" from queue
+        }
+    }
+
+    class Point {
+        int x;
+        int y;
+        Point(int x, int y) {
+            this.x = x;
+            this.y = y;
         }
     }
 }
