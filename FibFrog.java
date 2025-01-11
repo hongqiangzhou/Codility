@@ -89,10 +89,6 @@ import java.util.*;
 class Solution {
     public int solution(int[] A) {
         // Implement your solution here
-        if (A.length == 0) {
-            return 1;
-        }
-
         List<Integer> fabs = new ArrayList<>();
         fabs.add(1);
         fabs.add(2);
