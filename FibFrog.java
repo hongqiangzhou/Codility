@@ -75,62 +75,63 @@ class Solution {
 }
 
 
-// My solution, following the same idea as above. Not tested yet.
+// My solution, following the same idea as above, correctness = 83%, performance = 33%.
+import java.util.*;
+
 class Solution {
-    public static void main(String[] args) {
+    public int solution(int[] A) {
+        // Implement your solution here
+        if (A.length == 0) {
+            return 1;
+        }
 
-        int[] A = {0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0};
+        List<Integer> fabs = new ArrayList<>();
+        fabs.add(1);
+        fabs.add(2);
+        int i = 2;
+        int temp = fabs.get(i-1) + fabs.get(i-2);
+        while(temp <= A.length) {
+            fabs.add(temp);
+            i++;
+            temp = fabs.get(i-1) + fabs.get(i-2);
+        }
 
-        System.out.println(solution(A));
-    }
-
-    private static int solution(int[] A) {
-        List<Integer> fabs = getFabonacci(A.length + 1);
-
-        boolean[] accessed = new boolean[A.length];
-        Stack<Jump> jumps = new Stack<>();
-        jumps.add(new Jump(-1, 0));
-
-        while(true) {
-            if (jumps.isEmpty())
-                return -1;
-
-            Jump currJump = jumps.pop();
-            for (int f : fabs) {
-                if (currJump.position + f == A.length)
-                    return currJump.counter + 1;
-                else if (currJump.position + f > A.length || A[currJump.position + f] == 0 || accessed[currJump.position + f])
-                    continue;
-                else {
-                    jumps.add(new Jump(currJump.position + f, currJump.counter + 1));
-                    accessed[currJump.position + f] = true;
+        Stack<Jump> stack = new Stack<>();
+        stack.push(new Jump(-1, 0));
+        boolean crossed = false;
+        while(!crossed && !stack.isEmpty()) {
+            Jump jump = stack.pop();
+            for (int fab: fabs) {
+                int pos = jump.position + fab;
+                if (pos == A.length) {
+                    stack.push(new Jump(pos, jump.steps + 1));
+                    crossed = true;
+                    break;
+                } else if (pos > A.length) {
+                    break;
+                } else if (A[pos] == 1) {
+                    stack.push(new Jump(pos, jump.steps + 1));
                 }
             }
         }
 
-    }
-
-    private static List<Integer> getFabonacci(int max) {
-        List<Integer> fab = new ArrayList<>();
-        fab.add(1);
-        fab.add(1);
-        int i = 2;
-        while(fab.get(i-1) <= max) {
-            fab.add(fab.get(i-1) + fab.get(i-2));
-            i++;
+        if (!stack.isEmpty()) {
+            return stack.pop().steps;
+        } else {
+            return -1;
         }
 
-        fab.remove(0);
-        return fab;
     }
-}
 
-class Jump {
-    public int position;
-    public int counter;
+    class Jump {
+        int position;
+        int steps;
 
-    public Jump(int position, int counter) {
-        this.position = position;
-        this.counter = counter;
+        Jump(int position, int steps) {
+            this.position = position;
+            this.steps = steps;
+        }
+
     }
+    
 }
