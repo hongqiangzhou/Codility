@@ -81,7 +81,8 @@ class Solution {
 }
 
 
-// My solution, following the same idea as above, correctness = 83%, performance = 33%.
+// My solution, correctness = 83%, performance = 33%.
+// Consider a case when A = [0, 1, 1, 0, 0, 1]. Below solution yields 3 (A[2], A[5], then 5 + 1 more step to cross). In fact, the answer is 2 (A[1], then 1 + 5).
 import java.util.*;
 
 class Solution {
