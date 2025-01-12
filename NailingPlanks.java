@@ -1,54 +1,57 @@
-// Solution with score 75% and a few timeout exceptions.
+// Solution with score 87% with one timeout exception.
+
+import java.util.*;
+
 class Solution {
     public int solution(int[] A, int[] B, int[] C) {
-        // write your code in Java SE 8
-        List<Plank> planks = IntStream.range(0, A.length).boxed()
-                .map(i -> new Plank(A[i], B[i]))
-                .sorted(Comparator.comparing(e -> e.x))
-                .collect(Collectors.toList());
-
+        // Implement your solution here
+        int[][] nails = new int[C.length][2];
         for (int i = 0; i < C.length; i++) {
-            while(planks.size() > 0) {
-                int pIndex = findPlunk(C[i], planks);
-                if (pIndex > -1) {
-                    planks.remove(pIndex);
-                } else {
-                    break;
-                }
-            }
+            nails[i][0] = C[i];
+            nails[i][1] = i;
+        }
+        Arrays.sort(nails, Comparator.comparingInt(nail -> nail[0]));
 
-            if (planks.size() == 0) {
-                return i + 1;
+        int globalIndex = 0;
+        for (int i = 0; i < A.length; i++) {
+            int bestIndex = findBestIndex(A[i], B[i], nails, globalIndex);
+            if (bestIndex == -1) {
+                return -1;
             }
+            globalIndex = Math.max(globalIndex, bestIndex);
         }
 
-        return -1;        
+        return globalIndex + 1;
     }
 
-    private int findPlunk(int nail, List<Plank> planks) {
-        int lower = 0;
-        int upper = planks.size() -1;
 
-        while (lower <= upper) {
-            int mid = (lower + upper) / 2;
-            if (planks.get(mid).x > nail) {
-                upper = mid - 1;
-            } else if (planks.get(mid).y < nail) {
-                lower = mid + 1;
+    private int findBestIndex(int start, int end, int[][] nails, int globalIndex) {
+
+        int low = 0;
+        int high = nails.length - 1;
+        int idx = -1;
+        while(low < nails.length && low <= high) {
+            int mid = (low + high) / 2;
+            if (nails[mid][0] < start) {
+                low = mid + 1;
+            } else if (nails[mid][0] > end) {
+                high = mid - 1;
             } else {
-                return mid;
+                idx = mid;
+                high = mid - 1;
             }
         }
-        return -1;
-    }
 
-    private class Plank {
-        public int x;
-        public int y;
+        if (idx == -1) return -1;
+        if (nails[idx][1] < globalIndex) return nails[idx][1];
 
-        Plank(int x, int y) {
-            this.x = x;
-            this.y = y;
+        int bestIndex = nails[idx][1];
+        for (int i = idx+1; i < nails.length; i++) {
+            if (nails[i][0] > end) break;
+            if (nails[i][1] < bestIndex) bestIndex = nails[i][1];
+            if (bestIndex < globalIndex) return bestIndex;
         }
+
+        return bestIndex;
     }
 }
