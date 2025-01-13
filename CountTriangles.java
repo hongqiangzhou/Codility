@@ -38,3 +38,30 @@ class Solution {
         return numTriangle;
     }
 }
+
+// This solution follows the same idea, but is easier to understand.
+import java.util.*;
+
+class Solution {
+    public int solution(int[] A) {
+        // Implement your solution here
+        if (A.length < 3) return 0;
+
+        Arrays.sort(A);
+
+        int count = 0;
+
+        for (int i = 0; i < A.length - 2; i++) {
+            int right = i + 2;
+            for (int left = i + 1; left < A.length-1; left++) {
+                if (left == right) right++;
+                while(right < A.length && A[i] + A[left] > A[right]) {
+                    right++;
+                }
+                count += right - left - 1;
+            }
+        }
+
+        return count;
+    }
+}
