@@ -38,6 +38,28 @@ class Solution {
     }
 }
 
+// Same idea, starting from the left. Score: 100%.
+class Solution {
+    public int solution(int[] A, int[] B) {
+        // Implement your solution here
+        if (B.length == 0) return 0;
+
+        int ans = 1;
+        int rightEnd = B[0];
+        for (int i = 1; i < A.length; i++) {
+            if (A[i] > rightEnd) {
+                ans++;
+                rightEnd = B[i];
+            } else if (B[i] < rightEnd) {
+                rightEnd = B[i];
+            }
+        }
+
+        return ans;
+    }
+}
+
+
 // My solution, score: 90%, one timeout exception
 class Solution {
     public int solution(int[] A, int[] B) {
