@@ -15,29 +15,34 @@ class Solution {
 }
 
 // This solution follows `https://codility.com/media/train/solution-min-abs-sum.pdf`
-// Score: 54%, complexity: O(N**2*max(abs(A))), a lot of timeout exceptions.
+// Score: 63%, complexity: O(N**2*max(abs(A))), a lot of timeout exceptions.
 class Solution {
     public int solution(int[] A) {
-        // write your code in Java SE 8
-        List<Integer> aList = Arrays.stream(A).boxed().map(Math::abs).collect(Collectors.toList());
-        int sum = aList.stream().collect(Collectors.summingInt(Integer::intValue));
+        // Implement your solution here
+        int sumA = 0;
+        for (int i = 0; i < A.length; i++) {
+            A[i] = Math.abs(A[i]);
+            sumA += A[i];
+        }
 
-        boolean[] dp = new boolean[sum + 1];
-        dp[0] = true;
-
-        for (int a : aList) {
-            for (int i = sum; i >= 0; i--) {
-                if (dp[i] && a + i <= sum)
-                    dp[a + i] = true;
+        int[] dp = new int[sumA + 1];
+        dp[0] = 1;
+        for (int a: A) {
+            for (int i = sumA; i >= 0; i--) {
+                if (dp[i] == 1 && i + a < sumA) {
+                    dp[i+a] = 1;
+                }
             }
         }
 
-        int ans = sum;
-        for (int i = 0; i < sum / 2 + 1; i++) {
-            if (dp[i])
-                ans = Math.min(ans, Math.abs(sum - 2 * i));
+        int result = sumA;
+        for (int i = 0; i <= sumA/2; i++) {
+            if (dp[i] == 1) {
+                result = Math.min(result, sumA - 2 * i);
+            }
         }
 
-        return ans;
+
+        return result;
     }
 }
